@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Svgvi.Editor : Gtk.Grid {
+public class Svgvi.Editor : Gtk.ScrolledWindow {
   private Svgvi.SvgView viewer;
   private Svgvi.SourceView source;
   private File _file = null;
@@ -39,11 +39,17 @@ public class Svgvi.Editor : Gtk.Grid {
   }
 
   construct {
+    var box = new Gtk.Grid ();
     viewer = new Svgvi.SvgView ();
-    source = new Svgvi.SourceView ();
-    attach (source, 0, 0, 1, 1);
-    attach (viewer, 1, 0, 1, 1);
+    var sw = new Gtk.ScrolledWindow (null, null);
+    box.attach (sw, 0, 0, 1, 1);
+    box.attach (viewer, 1, 0, 1, 1);
     viewer.expand = true;
-    source.expand = true;
+    source = new Svgvi.SourceView ();
+    sw.add (source);
+    source.vexpand = true;
+    sw.expand = true;
+    add (box);
+    expand = true;
   }
 }
