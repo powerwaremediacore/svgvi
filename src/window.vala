@@ -32,6 +32,21 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
   construct {
     editor = new Svgvi.Editor ();
     bxmain.pack_start (editor, true, true, 12);
+    bxmain.show_all ();
+    editor.hexpand = true;
+    editor.vexpand = true;
+    bopen.clicked.connect (()=>{
+      var fs = new Gtk.FileChooserDialog ("Open SVG",
+                                          this,
+                                          Gtk.FileChooserAction.OPEN,
+                                          "_Cancel", Gtk.ResponseType.CANCEL,
+                                          "_Select", Gtk.ResponseType.ACCEPT);
+      var res = fs.run ();
+      if (res == Gtk.ResponseType.ACCEPT) {
+        editor.file = fs.get_file ();
+      }
+      fs.destroy ();
+    });
   }
 
   public Window (Gtk.Application app) {
