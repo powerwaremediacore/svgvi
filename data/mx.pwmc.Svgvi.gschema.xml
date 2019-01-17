@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="svgvi">
+	<schema id="org.gnome.Svgvi" path="/org/gnome/Svgvi/">
+	</schema>
+</schemalist>
