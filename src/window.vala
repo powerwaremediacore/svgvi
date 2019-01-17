@@ -26,11 +26,12 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
   [GtkChild]
   private Gtk.Button bsave;
   
-  private GFile *current;
-  private GSvg.Document doc;
+  private File current;
+  private Svgvi.Editor editor;
 
   construct {
-    
+    editor = new Svgvi.Editor ();
+    bxmain.pack_start (editor, true, true, 12);
   }
 
   public Window (Gtk.Application app) {

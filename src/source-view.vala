@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using Gtk;
 
 public class Svgvi.SourceView : Gtk.SourceView {
   construct {
@@ -25,6 +26,6 @@ public class Svgvi.SourceView : Gtk.SourceView {
     b.highlight_matching_brackets = true;
     b.highlight_syntax = true;
     var lman = SourceLanguageManager.get_default ();
-    buffer.language = lman.get_language ("xml");
+    ((Gtk.SourceBuffer) buffer).language = lman.get_language ("xml");
   }
 }

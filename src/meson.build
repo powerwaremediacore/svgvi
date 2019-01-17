@@ -8,7 +8,7 @@ svgvi_sources = [
 ]
 
 svgvi_deps = [
-  dependency('gsvgtk-0.6', version: '>= 0.6'),
+  dependency('gsvgtk-0.6', version: '>= 0.5.1'),
   dependency ('gtksourceview-3.0')
 ]
 

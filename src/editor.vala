@@ -17,12 +17,12 @@
  */
 
 public class Svgvi.Editor : Gtk.Grid {
-  private Svgvi.SvgViewer viewer;
+  private Svgvi.SvgView viewer;
   private Svgvi.SourceView source;
   construct {
-    viewer = new Svgvi.SvgViewer ();
+    viewer = new Svgvi.SvgView ();
     source = new Svgvi.SourceView ();
-    atach (viewer, 0, 0, 1, 1);
-    atach (source, 1, 0, 1, 1);
+    attach (viewer, 0, 0, 1, 1);
+    attach (source, 1, 0, 1, 1);
   }
 }

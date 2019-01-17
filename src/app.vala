@@ -18,12 +18,8 @@
 
 public class Svgvi.App : Gtk.Application {
   construct {
-    var open = new SimpleAction ("open", new VariantType ("s"));
-    var save = new SimpleAction ("open", null);
-    add_action (open);
-    add_action (save);
     activate.connect (() => {
-      var win = new Svgvi.Window (app);
+      var win = new Svgvi.Window (this);
       win.present ();
     });
   }
