@@ -16,27 +16,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Svgvi.SvgView : GSvgtk.Image {
+public class Svgvi.SvgView : Gtk.Grid {
+  private GSvgtk.Image _image;
+  private GSvg.Document _svg;
   private GSvg.SVGElement _view;
+  private GSvg.SVGElement _current;
   private string _rules_style;
   private GSvg.RectElement rectv;
   private GSvg.RectElement recth;
 
-  public GSvg.SVGElement view { get { return _view; } }
+  public GSvg.Document svg {
+    get { return _svg; }
+    set {
+      _svg = value;
+      assign_svg ();
+    }
+  }
   public string rules_style {
     get {
       return _rules_style;
     }
     set {
       _rules_style = value;
+      generate_view ();
+      assign_svg ();
     }
   }
   construct {
+    _image = new GSvgtk.Image ();
+    attach (_image, 0, 1, 1, 1);
     _rules_style = "fill: gray";
-    svg = new GSvg.GsDocument ();
-    message ("Initializing internal SVG container");
+    generate_view ();
+    _image.render ();
+  }
+  private void assign_svg () {
+    if (_current != null) {
+      _current.remove ();
+      _current = null;
+    }
+    if (_svg != null) {
+      _current = _view.add_svg (null, null, null, null);
+      _current.read_from_string (_svg.write_string ());
+      _view.append_child (_current);
+    }
+    _image.render ();
+  }
+  private void generate_view () {
     try {
-      _view = svg.add_svg (null, null, "225.9mm", "289.4mm");
+      _image.svg = new GSvg.GsDocument ();
+      _view = _image.svg.add_svg (null, null, "225.9mm", "289.4mm");
       recth = _view.create_rect ("5mm","0mm","215.9mm","5mm", null, null);
       _view.append_child (recth);
       recth.style = new GSvg.GsCSSStyleDeclaration ();
@@ -63,7 +91,7 @@ public class Svgvi.SvgView : GSvgtk.Image {
       while (lx1 + 5 < recth.width.base_val.value) {
         lx1 += 5;
         lx2 += 5;
-        var nlh = Object.new (typeof(GSvg.GsLineElement), "owner_document", svg) as GSvg.LineElement;
+        var nlh = Object.new (typeof(GSvg.GsLineElement), "owner_document", _image.svg) as GSvg.LineElement;
         nlh.style = lstyle;
         nlh.x1 = new GSvg.GsAnimatedLengthX () as GSvg.AnimatedLengthX;
         nlh.x1.base_val = new GSvg.GsLength () as GSvg.Length;
@@ -84,7 +112,7 @@ public class Svgvi.SvgView : GSvgtk.Image {
         } else {
           middle = true;
         }
-        view.append_child (nlh);
+        _view.append_child (nlh);
       }
       var lv = _view.create_line ("0mm","5mm","5mm","5mm");
       _view.append_child (lv);
@@ -100,7 +128,7 @@ public class Svgvi.SvgView : GSvgtk.Image {
       while (ly1 + 5 < rectv.height.base_val.value) {
         ly1 += 5;
         ly2 += 5;
-        var nlv = Object.new (typeof(GSvg.GsLineElement), "owner_document", svg) as GSvg.LineElement;
+        var nlv = Object.new (typeof(GSvg.GsLineElement), "owner_document", _image.svg) as GSvg.LineElement;
         nlv.style = lstyle;
         nlv.x1 = new GSvg.GsAnimatedLengthX () as GSvg.AnimatedLengthX;
         nlv.x1.base_val.value = lx1;
@@ -122,7 +150,6 @@ public class Svgvi.SvgView : GSvgtk.Image {
         }
         _view.append_child (nlv);
       }
-      render ();
     } catch (GLib.Error e) {
       warning ("SVG Viewer Initialization Error: %s", e.message);
     }
