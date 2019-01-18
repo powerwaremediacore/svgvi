@@ -50,14 +50,12 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
   construct {
     var box = new Gtk.Paned (Gtk.Orientation.VERTICAL);
     var sw1 = new Gtk.ScrolledWindow (null, null);
-    var sw2 = new Gtk.ScrolledWindow (null, null);
+    viewer = new Svgvi.SvgView ();
     box.pack1 (sw1, true, true);
-    box.pack2 (sw2, true, true);
+    box.pack2 (viewer, true, true);
     source = new Svgvi.SourceView ();
     sw1.add (source);
     source.vexpand = true;
-    viewer = new Svgvi.SvgView ();
-    sw2.add (viewer);
     viewer.expand = true;
     add (box);
     expand = true;

@@ -18,6 +18,7 @@
 
 public class Svgvi.SvgView : Gtk.Grid {
   private GSvgtk.Image _image;
+  private Gtk.ScrolledWindow sw;
   private GSvg.Document _svg;
   private GSvg.SVGElement _view;
   private GSvg.SVGElement _current;
@@ -45,8 +46,10 @@ public class Svgvi.SvgView : Gtk.Grid {
     }
   }
   construct {
+    var sw = new Gtk.ScrolledWindow (null, null);
     _image = new GSvgtk.Image ();
-    attach (_image, 0, 1, 1, 1);
+    sw.add (_image);
+    attach (sw, 0, 1, 1, 1);
     _rules_style = "fill: gray";
     var f = File.new_for_uri ("resource:///mx/pwmc/Svgvi/logo-background.svg");
     generate_view ();
@@ -60,6 +63,9 @@ public class Svgvi.SvgView : Gtk.Grid {
     } catch (GLib.Error e) {
       warning ("Error loading default background: %s", e.message);
     }
+    sw.expand = true;
+    sw.scroll_child.connect ((scroll, hor)=>{
+    });
   }
   private void assign_svg () {
     try {
