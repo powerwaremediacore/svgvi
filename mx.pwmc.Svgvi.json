@@ -76,8 +76,8 @@
                 "sources": [
                         {
                                 "type": "archive",
-                                "url": "https://gitlab.com/pwmc/gsvg/-/archive/0.5.1/gsvg-0.5.1.tar.gz",
-                                "sha256": "5c659b9bbf796e71a1039ab7720dd5f38691c8d217b5fb89384fa213fe41e956"
+                                "url": "https://gitlab.com/pwmc/gsvg/-/archive/0.5.3/gsvg-0.5.3.tar.gz",
+                                "sha256": "8f72fad98a0ec7a14a19d855403ab4969a12c09da04644fee0ee5dc958edd349"
                         }
                 ]
         },
