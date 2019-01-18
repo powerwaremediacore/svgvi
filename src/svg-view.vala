@@ -55,9 +55,9 @@ public class Svgvi.SvgView : Gtk.Grid {
       _current = null;
     }
     if (_svg != null) {
-      _current = _view.add_svg (null, null, null, null);
-      _current.read_from_string (_svg.write_string ());
-      _view.append_child (_current);
+      _current = _view.add_svg ("5mm", "5mm", null, null);
+      var nsvg = _current.add_svg (null, null, null, null);
+      nsvg.read_from_string (_svg.write_string ());
     }
     _image.render ();
   }
