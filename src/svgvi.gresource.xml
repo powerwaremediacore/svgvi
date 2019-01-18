@@ -3,5 +3,6 @@
   <gresource prefix="/mx/pwmc/Svgvi">
     <file>window.ui</file>
     <file>logo.svg</file>
+    <file>logo-background.svg</file>
   </gresource>
 </gresources>

@@ -46,8 +46,18 @@ public class Svgvi.SvgView : Gtk.Grid {
     _image = new GSvgtk.Image ();
     attach (_image, 0, 1, 1, 1);
     _rules_style = "fill: gray";
+    var f = File.new_for_uri ("resource:///mx/pwmc/Svgvi/logo-background.svg");
     generate_view ();
-    _image.render ();
+    try {
+      var ostream = new MemoryOutputStream.resizable ();
+      var istream = f.read ();
+      ostream.splice (istream, OutputStreamSpliceFlags.CLOSE_SOURCE, null);
+      var nsvg = new GSvg.GsDocument ();
+      nsvg.read_from_string ((string) ostream.get_data ());
+      svg = nsvg;
+    } catch (GLib.Error e) {
+      warning ("Error loading default background: %s", e.message);
+    }
   }
   private void assign_svg () {
     if (_current != null) {

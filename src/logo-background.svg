@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="225.9mm" height="299.4mm">
+<svg xmlns="http://www.w3.org/2000/svg" x="0mm" y="0mm" transform="scale(10)">
+    <ellipse fill="none" stroke="blue" stroke-width="0.5mm" cx="5.5mm" cy="5mm" rx="5mm" ry="2.5mm"/>
+    <ellipse fill="white" stroke="blue" stroke-width="0.5mm" cx="5.5mm" cy="5mm" rx="1.25mm" ry="2.5mm"/>
+    <line stroke="blue" stroke-width="0.5mm" x1="0.5mm" y1="0mm" x2="5mm" y2="7.5mm"/>
+    <line stroke="blue" stroke-width="0.5mm" x1="10.5mm" y1="0mm" x2="6mm" y2="7.5mm"/>
+    <text font-family="Verdana" font-size="2.5mm" fill="blue" text-anchor="middle" x="5.5mm" y="2.2mm">SVG</text>
+</svg>
+</svg>
