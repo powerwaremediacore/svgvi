@@ -60,16 +60,20 @@ public class Svgvi.SvgView : Gtk.Grid {
     }
   }
   private void assign_svg () {
-    if (_current != null) {
-      _current.remove ();
-      _current = null;
+    try {
+      if (_current != null) {
+        _current.remove ();
+        _current = null;
+      }
+      if (_svg != null) {
+        _current = _view.add_svg ("5mm", "5mm", null, null);
+        var nsvg = _current.add_svg (null, null, null, null);
+        nsvg.read_from_string (_svg.write_string ());
+      }
+      _image.render ();
+    } catch (GLib.Error e) {
+      warning ("Error parsing SVG source: %s", e.message);
     }
-    if (_svg != null) {
-      _current = _view.add_svg ("5mm", "5mm", null, null);
-      var nsvg = _current.add_svg (null, null, null, null);
-      nsvg.read_from_string (_svg.write_string ());
-    }
-    _image.render ();
   }
   private void generate_view () {
     try {

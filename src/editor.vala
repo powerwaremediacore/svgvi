@@ -30,13 +30,17 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     }
     set {
       _file = value;
-      var istream = _file.read ();
-      var ostream = new MemoryOutputStream.resizable ();
-      ostream.splice (istream, OutputStreamSpliceFlags.CLOSE_SOURCE, cancellable);
-      source.buffer.text = (string) ostream.get_data ();
-      var doc = new GSvg.GsDocument ();
-      doc.read_from_string ((string) ostream.get_data ());
-      viewer.svg = doc;
+      try {
+        var istream = _file.read ();
+        var ostream = new MemoryOutputStream.resizable ();
+        ostream.splice (istream, OutputStreamSpliceFlags.CLOSE_SOURCE, cancellable);
+        source.buffer.text = (string) ostream.get_data ();
+        var doc = new GSvg.GsDocument ();
+        doc.read_from_string ((string) ostream.get_data ());
+        viewer.svg = doc;
+      } catch (GLib.Error e) {
+        warning ("Error parsing SVG source File: %s", e.message);
+      }
     }
   }
 
@@ -73,7 +77,11 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     });
   }
   public void save_to (File f) {
-    (viewer.svg as GXml.GomDocument).write_file (f);
-    file = f;
+    try {
+      (viewer.svg as GXml.GomDocument).write_file (f);
+      file = f;
+    } catch (GLib.Error e) {
+      warning ("Error while trying to saving as, SVG file: %s", e.message);
+    }
   }
 }

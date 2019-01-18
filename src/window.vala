@@ -28,7 +28,6 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
   [GtkChild]
   private Gtk.Button bsaveas;
   
-  private File current;
   private Svgvi.Editor editor;
 
   public File file {
