@@ -16,4 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Svgvi.SvgView : GSvgtk.Image {}
+public class Svgvi.SvgView : GSvgtk.Image {
+  private GSvg.Document _view;
+  public GSvg.Document view { get { return _view; } }
+  construct {
+    _view = new GSvg.GsDocument ();
+  }
+}

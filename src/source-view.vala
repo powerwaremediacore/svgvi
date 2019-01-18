@@ -22,6 +22,13 @@ public class Svgvi.SourceView : Gtk.SourceView {
     editable = true;
     cursor_visible = true;
     monospace = true;
+    auto_indent = true;
+    highlight_current_line = true;
+    indent_on_tab = true;
+    indent_width = 4;
+    show_line_marks = true;
+    show_line_numbers = true;
+    smart_backspace = true;
     var b = get_buffer () as Gtk.SourceBuffer;
     b.highlight_matching_brackets = true;
     b.highlight_syntax = true;
