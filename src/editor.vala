@@ -52,7 +52,7 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     viewer.expand = true;
     add (box);
     expand = true;
-    source.buffer.insert_text.connect (()=>{
+    source.buffer.end_user_action.connect (()=>{
       try {
         var doc = new GSvg.GsDocument ();
         doc.read_from_string (source.buffer.text);
