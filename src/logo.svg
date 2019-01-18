@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="9.5mm" height="7mm">
-	<rect y="0mm" ry="1mm" fill="red" width="5mm" height="5mm" x="0mm" rx="1mm"/>
-	<rect y="1mm" ry="1mm" fill="green" width="5mm" height="5mm" x="4.5mm" rx="1mm"/>
-	<rect y="2mm" ry="1mm" fill="blue" width="5mm" height="5mm" x="2.5mm" rx="1mm"/>
-	<svg y="4.5mm" width="5.5mm" height="2.5mm" x="2.5mm">
-		<circle cy="0mm" r="2mm" stroke="white" fill="none" stroke-width="0.5mm" cx="3mm"/>
-	</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="225.9mm" height="299.4mm">
+    <ellipse fill="none" stroke="blue" stroke-width="0.5mm" cx="5mm" cy="5mm" rx="5mm" ry="2.5mm"/>
+    <ellipse fill="white" stroke="blue" stroke-width="0.5mm" cx="5mm" cy="5mm" rx="1.25mm" ry="2.5mm"/>
+    <line stroke="blue" stroke-width="0.5mm" x1="0mm" y1="0mm" x2="4.5mm" y2="7.5mm"/>
+    <line stroke="blue" stroke-width="0.5mm" x1="10mm" y1="0mm" x2="5.5mm" y2="7.5mm"/>
+    <text font-family="Verdana" font-size="2.5mm" fill="blue" text-anchor="middle" x="5mm" y="2.2mm">SVG</text>
 </svg>
