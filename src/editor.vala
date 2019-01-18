@@ -40,6 +40,9 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     }
   }
 
+  public int current_row { get; set; }
+  public int current_column { get; set; }
+
   construct {
     var box = new Gtk.Paned (Gtk.Orientation.VERTICAL);
     var sw1 = new Gtk.ScrolledWindow (null, null);
@@ -63,6 +66,10 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
         doc.write_file (file);
         updated ();
       } catch {}
+    });
+    source.buffer.insert_text.connect ((ref pos, new_text, new_text_length)=>{
+      current_row = pos.get_line ();
+      current_column = pos.get_line_offset ();
     });
   }
   public void save_to (File f) {

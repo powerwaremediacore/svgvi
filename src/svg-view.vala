@@ -96,7 +96,6 @@ public class Svgvi.SvgView : Gtk.Grid {
       var utly1 = lh.y1.base_val.unit_type;
       var ly2 = lh.y2.base_val.value;
       var utly2 = lh.y2.base_val.unit_type;
-      message ("Type x1: %s - y1: %s - x2:%s - y2:%s", utlx1.to_string (), utly1.to_string (), utlx2.to_string (), utly2.to_string ());
       bool middle = true;
       while (lx1 + 5 < recth.width.base_val.value) {
         lx1 += 5;

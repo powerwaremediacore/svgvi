@@ -17,10 +17,39 @@
  */
 
 public class Svgvi.App : Gtk.Application {
+  private Settings settings;
+
+  public string last_file { get; set; }
+  public int last_row { get; set; }
+  public int last_column { get; set; }
   construct {
+    settings = null;
+    SettingsSchemaSource scs = SettingsSchemaSource.get_default ();
+    SettingsSchema ss = scs.lookup ("/mx/pwmc/Svgvi", false);
+    if (ss != null) {
+      settings = new Settings ("/mx/pwmc/Svgvi");
+      assert (settings != null);
+      last_file = settings.get_string ("last-file");
+      last_row = settings.get_int ("last-row");
+      last_column = settings.get_int ("last-column");
+    }
     activate.connect (() => {
       var win = new Svgvi.Window (this);
+      if (get_active_window () == null) {
+        var f = File.new_for_uri (last_file);
+        if (f.query_exists (null)) {
+          win.file = f;
+        }
+      }
       win.present ();
+    });
+    shutdown.connect (()=>{
+      var win = get_active_window () as Svgvi.Window;
+      if (win != null && settings != null) {
+        settings.set_string ("last-file", win.file.get_uri ());
+        settings.set_int ("last-row", win.current_row);
+        settings.set_int ("last-column", win.current_column);
+      }
     });
   }
   public App () {

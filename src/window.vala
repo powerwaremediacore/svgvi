@@ -31,6 +31,21 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
   private File current;
   private Svgvi.Editor editor;
 
+  public File file {
+    get { return editor.file; }
+    set { editor.file = value; }
+  }
+
+  public int current_row {
+    get { return editor.current_row; }
+    set { editor.current_row = value; }
+  }
+
+  public int current_column {
+    get { return editor.current_column; }
+    set { editor.current_column = value; }
+  }
+
   construct {
     editor = new Svgvi.Editor ();
     bxmain.pack_start (editor, true, true, 12);
