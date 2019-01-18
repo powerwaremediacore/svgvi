@@ -39,16 +39,17 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
   }
 
   construct {
-    var box = new Gtk.Grid ();
-    viewer = new Svgvi.SvgView ();
-    var sw = new Gtk.ScrolledWindow (null, null);
-    box.attach (sw, 0, 0, 1, 1);
-    box.attach (viewer, 1, 0, 1, 1);
-    viewer.expand = true;
+    var box = new Gtk.Paned (Gtk.Orientation.VERTICAL);
+    var sw1 = new Gtk.ScrolledWindow (null, null);
+    var sw2 = new Gtk.ScrolledWindow (null, null);
+    box.pack1 (sw1, true, true);
+    box.pack2 (sw2, true, true);
     source = new Svgvi.SourceView ();
-    sw.add (source);
+    sw1.add (source);
     source.vexpand = true;
-    sw.expand = true;
+    viewer = new Svgvi.SvgView ();
+    sw2.add (viewer);
+    viewer.expand = true;
     add (box);
     expand = true;
     source.buffer.insert_text.connect (()=>{
