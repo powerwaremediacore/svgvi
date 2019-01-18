@@ -21,6 +21,8 @@ public class Svgvi.SvgView : Gtk.Grid {
   private GSvg.Document _svg;
   private GSvg.SVGElement _view;
   private GSvg.SVGElement _current;
+  private GSvg.SVGElement _top_rule;
+  private GSvg.SVGElement _side_rule;
   private string _rules_style;
   private GSvg.RectElement rectv;
   private GSvg.RectElement recth;
@@ -79,18 +81,15 @@ public class Svgvi.SvgView : Gtk.Grid {
     try {
       _image.svg = new GSvg.GsDocument ();
       _view = _image.svg.add_svg (null, null, "225.9mm", "289.4mm");
-      recth = _view.create_rect ("5mm","0mm","215.9mm","5mm", null, null);
-      _view.append_child (recth);
+      _top_rule = _view.add_svg ("0mm", "0mm", "225.9mm", "289.4mm");
+      recth = _top_rule.create_rect ("5mm","0mm","215.9mm","5mm", null, null);
+      _top_rule.append_child (recth);
       recth.style = new GSvg.GsCSSStyleDeclaration ();
       recth.style.css_text = rules_style;
-      rectv = _view.create_rect ("0mm","5mm","5mm","279.4mm", null, null);
-      _view.append_child (rectv);
-      rectv.style = new GSvg.GsCSSStyleDeclaration ();
-      rectv.style.css_text = rules_style;
       var lstyle = new GSvg.GsCSSStyleDeclaration ();
       lstyle.css_text = """stroke: black; stroke-width: 0.25mm""";
       var lh = _view.create_line ("5mm","0mm","5mm","5mm");
-      _view.append_child (lh);
+      _top_rule.append_child (lh);
       lh.style = lstyle;
       var lx1 = lh.x1.base_val.value;
       var utlx1 = lh.x1.base_val.unit_type;
@@ -126,7 +125,7 @@ public class Svgvi.SvgView : Gtk.Grid {
         } else {
           middle = true;
         }
-        _view.append_child (nlh);
+        _top_rule.append_child (nlh);
         var pos = lx1 - 5;
         if (n > 0 && (n/2.0) != (int) (n / 2.0)) {
           var txpos = new GSvg.GsLength ();
@@ -135,17 +134,22 @@ public class Svgvi.SvgView : Gtk.Grid {
           var typos = new GSvg.GsLength ();
           typos.value = nlh.y2.base_val.value - 0.5;
           typos.unit_type = nlh.y2.base_val.unit_type;
-          var t = _view.create_text ("%d".printf ((int) pos),
+          var t = _top_rule.create_text ("%d".printf ((int) pos),
                       txpos.to_string (),
                       typos.to_string (),
                       null, null,
                       """font-family: Verdana; font-size: 2.5mm; fill: black""");
-          _view.append_child (t);
+          _top_rule.append_child (t);
         }
         n++;
       }
-      var lv = _view.create_line ("0mm","5mm","5mm","5mm");
-      _view.append_child (lv);
+      _side_rule = _view.add_svg ("0mm", "0mm", "225.9mm", "289.4mm");
+      rectv = _side_rule.create_rect ("0mm","5mm","5mm","279.4mm", null, null);
+      _side_rule.append_child (rectv);
+      rectv.style = new GSvg.GsCSSStyleDeclaration ();
+      rectv.style.css_text = rules_style;
+      var lv = _side_rule.create_line ("0mm","5mm","5mm","5mm");
+      _side_rule.append_child (lv);
       lv.style = lstyle;
       lx1 = lv.x1.base_val.value;
       utlx1 = lh.x1.base_val.unit_type;
@@ -179,7 +183,7 @@ public class Svgvi.SvgView : Gtk.Grid {
         } else {
           middle = true;
         }
-        _view.append_child (nlv);
+        _side_rule.append_child (nlv);
         var pos = ly1 - 5;
         if (n > 0 && (n/2.0) != (int) (n / 2.0)) {
           var txpos = new GSvg.GsLength ();
@@ -188,12 +192,12 @@ public class Svgvi.SvgView : Gtk.Grid {
           var typos = new GSvg.GsLength ();
           typos.value = nlv.y1.base_val.value - 0.5;
           typos.unit_type = nlv.y1.base_val.unit_type;
-          var t = _view.create_text ("%d".printf ((int) pos),
+          var t = _side_rule.create_text ("%d".printf ((int) pos),
                       txpos.to_string (),
                       typos.to_string (),
                       null, null,
                       """font-family: Verdana; font-size: 2.5mm; fill: black""");
-          _view.append_child (t);
+          _side_rule.append_child (t);
         }
         n++;
       }
