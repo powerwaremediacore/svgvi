@@ -51,5 +51,14 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     sw.expand = true;
     add (box);
     expand = true;
+    source.buffer.insert_text.connect (()=>{
+      try {
+        var doc = new GSvg.GsDocument ();
+        doc.read_from_string (source.buffer.text);
+        viewer.svg = doc;
+      } catch (Error e) {
+        warning ("Error rendering image...");
+      }
+    });
   }
 }
