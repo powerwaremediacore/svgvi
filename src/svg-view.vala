@@ -97,6 +97,7 @@ public class Svgvi.SvgView : Gtk.Grid {
       var ly2 = lh.y2.base_val.value;
       var utly2 = lh.y2.base_val.unit_type;
       bool middle = true;
+      int n = 0;
       while (lx1 + 5 < recth.width.base_val.value) {
         lx1 += 5;
         lx2 += 5;
@@ -122,6 +123,22 @@ public class Svgvi.SvgView : Gtk.Grid {
           middle = true;
         }
         _view.append_child (nlh);
+        var pos = lx1 - 5;
+        if (n > 0 && (n/2.0) != (int) (n / 2.0)) {
+          var txpos = new GSvg.GsLength ();
+          txpos.value = nlh.x2.base_val.value + 0.2;
+          txpos.unit_type = nlh.x2.base_val.unit_type;
+          var typos = new GSvg.GsLength ();
+          typos.value = nlh.y2.base_val.value - 0.5;
+          typos.unit_type = nlh.y2.base_val.unit_type;
+          var t = _view.create_text ("%d".printf ((int) pos),
+                      txpos.to_string (),
+                      typos.to_string (),
+                      null, null,
+                      """font-family: Verdana; font-size: 2.5mm; fill: black""");
+          _view.append_child (t);
+        }
+        n++;
       }
       var lv = _view.create_line ("0mm","5mm","5mm","5mm");
       _view.append_child (lv);
@@ -134,6 +151,7 @@ public class Svgvi.SvgView : Gtk.Grid {
       utly1 = lh.y1.base_val.unit_type;
       ly2 = lv.y2.base_val.value;
       utly2 = lv.y2.base_val.unit_type;
+      n = 0;
       while (ly1 + 5 < rectv.height.base_val.value) {
         ly1 += 5;
         ly2 += 5;
@@ -158,6 +176,22 @@ public class Svgvi.SvgView : Gtk.Grid {
           middle = true;
         }
         _view.append_child (nlv);
+        var pos = ly1 - 5;
+        if (n > 0 && (n/2.0) != (int) (n / 2.0)) {
+          var txpos = new GSvg.GsLength ();
+          txpos.value = nlv.x1.base_val.value + 0.5;
+          txpos.unit_type = nlv.x1.base_val.unit_type;
+          var typos = new GSvg.GsLength ();
+          typos.value = nlv.y1.base_val.value - 0.5;
+          typos.unit_type = nlv.y1.base_val.unit_type;
+          var t = _view.create_text ("%d".printf ((int) pos),
+                      txpos.to_string (),
+                      typos.to_string (),
+                      null, null,
+                      """font-family: Verdana; font-size: 2.5mm; fill: black""");
+          _view.append_child (t);
+        }
+        n++;
       }
     } catch (GLib.Error e) {
       warning ("SVG Viewer Initialization Error: %s", e.message);
