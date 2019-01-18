@@ -22,9 +22,11 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
   [GtkChild]
   private Gtk.Box bxmain;
   [GtkChild]
+  private Gtk.HeaderBar header_bar;
+  [GtkChild]
   private Gtk.Button bopen;
   [GtkChild]
-  private Gtk.Button bsave;
+  private Gtk.Button bsaveas;
   
   private File current;
   private Svgvi.Editor editor;
@@ -44,6 +46,20 @@ public class Svgvi.Window : Gtk.ApplicationWindow {
       var res = fs.run ();
       if (res == Gtk.ResponseType.ACCEPT) {
         editor.file = fs.get_file ();
+        header_bar.subtitle = editor.file.get_basename ();
+      }
+      fs.destroy ();
+    });
+    bsaveas.clicked.connect (()=>{
+      var fs = new Gtk.FileChooserDialog ("Save as..",
+                                          this,
+                                          Gtk.FileChooserAction.SAVE,
+                                          "_Cancel", Gtk.ResponseType.CANCEL,
+                                          "_Save", Gtk.ResponseType.ACCEPT);
+      var res = fs.run ();
+      if (res == Gtk.ResponseType.ACCEPT) {
+        editor.save_to (fs.get_file ());
+        header_bar.subtitle = editor.file.get_basename ();
       }
       fs.destroy ();
     });

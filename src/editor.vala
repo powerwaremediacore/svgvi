@@ -22,6 +22,8 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
   private File _file = null;
   private Cancellable cancellable = null;
 
+  public signal void updated ();
+
   public File file {
     get {
       return _file;
@@ -52,14 +54,19 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     viewer.expand = true;
     add (box);
     expand = true;
+
     source.buffer.end_user_action.connect (()=>{
       try {
         var doc = new GSvg.GsDocument ();
         doc.read_from_string (source.buffer.text);
         viewer.svg = doc;
-      } catch (Error e) {
-        warning ("Error rendering image...");
-      }
+        doc.write_file (file);
+        updated ();
+      } catch {}
     });
+  }
+  public void save_to (File f) {
+    (viewer.svg as GXml.GomDocument).write_file (f);
+    file = f;
   }
 }
