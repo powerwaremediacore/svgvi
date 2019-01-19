@@ -46,7 +46,9 @@ public class Svgvi.SvgView : Gtk.Grid {
     }
   }
   construct {
-    var sw = new Gtk.ScrolledWindow (null, null);
+    var ha = new Gtk.Adjustment (0, 0, 400, 10, 100, 400);
+    var va = new Gtk.Adjustment (0, 0, 400, 10, 100, 400);
+    var sw = new Gtk.ScrolledWindow (ha, va);
     _image = new GSvgtk.Image ();
     sw.add (_image);
     attach (sw, 0, 1, 1, 1);
@@ -65,6 +67,28 @@ public class Svgvi.SvgView : Gtk.Grid {
     }
     sw.expand = true;
     sw.scroll_child.connect ((scroll, hor)=>{
+      switch (scroll) {
+        case NONE:
+        break;
+        case JUMP:
+        case STEP_BACKWARD:
+        break;
+        case STEP_FORWARD:
+        break;
+        case PAGE_BACKWARD:
+        case PAGE_FORWARD:
+        case STEP_UP:
+        case STEP_DOWN:
+        case PAGE_UP:
+        case PAGE_DOWN:
+        case STEP_LEFT:
+        case STEP_RIGHT:
+        case PAGE_LEFT:
+        case PAGE_RIGHT:
+        case START:
+        case END:
+        break;
+      }
     });
   }
   private void assign_svg () {

@@ -3,5 +3,6 @@ Name=svgvi
 Exec=svgvi
 Terminal=false
 Type=Application
-Categories=GTK;
+Icon=mx.pwmc.Svgvi.png
+Categories=Graphics
 StartupNotify=true

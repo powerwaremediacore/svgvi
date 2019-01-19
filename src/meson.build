@@ -24,3 +24,16 @@ executable('svgvi', svgvi_sources,
   vala_args: '--target-glib=2.50',  dependencies: svgvi_deps,
   install: true,
 )
+
+install_data([
+		'mx.pwmc.Svgvi.svg',
+	],
+	install_dir:
+		join_paths(get_option('datadir'),'icons', 'hicolor','scalable','apps')
+	)
+install_data([
+		'mx.pwmc.Svgvi.png',
+	],
+	install_dir:
+		join_paths(get_option('datadir'),'icons', 'hicolor','512x512','apps')
+	)
