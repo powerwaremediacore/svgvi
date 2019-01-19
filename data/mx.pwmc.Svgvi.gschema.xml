@@ -2,14 +2,17 @@
 <schemalist gettext-domain="svgvi">
   <schema id="mx.pwmc.Svgvi" path="/mx/pwmc/Svgvi/">
     <key name="last-file" type="s">
+      <default>""</default>
        <summary>Last file loaded</summary>
       <description>Last file loaded</description>
     </key>
     <key name="last-row" type="i">
+      <default>1</default>
        <summary>Last raw when editing</summary>
       <description>Last raw when editing</description>
     </key>
     <key name="last-column" type="i">
+      <default>1</default>
        <summary>Last column when editing</summary>
       <description>Last column when editing</description>
     </key>

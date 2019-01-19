@@ -3,6 +3,6 @@ Name=svgvi
 Exec=svgvi
 Terminal=false
 Type=Application
-Icon=mx.pwmc.Svgvi.png
+Icon=mx.pwmc.Svgvi.svg
 Categories=Graphics
 StartupNotify=true
