@@ -85,12 +85,13 @@
         {
                 "name": "gsvgtk",
                 "buildsystem": "meson",
+                "config-opts": [ "-Ddisable-clutter=true" ],
                 "builddir": true,
                 "sources": [
                         {
                                 "type": "archive",
-                                "url": "https://gitlab.com/pwmc/gsvgtk/-/archive/0.6.1/gsvgtk-0.6.1.tar.gz",
-                                "sha256": "11786c7f65a38d2430f4c548cf5efd0e8ebbc6b5695e6d53b589d06d49a67597"
+                                "url": "https://gitlab.com/pwmc/gsvgtk/-/archive/0.6.2/gsvgtk-0.6.2.tar.gz",
+                                "sha256": "5c470904ab965fc8f95bfa2e08425636beba8ac36a67ff731e908f1295a867fe"
                         }
                 ]
         },
