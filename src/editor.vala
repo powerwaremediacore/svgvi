@@ -31,9 +31,14 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     set {
       _file = value;
       try {
+        if (!file.query_exists (cancellable)) {
+          message ("No File exists: %s", _file.get_uri ());
+          return;
+        }
         var istream = _file.read ();
         var ostream = new MemoryOutputStream.resizable ();
         ostream.splice (istream, OutputStreamSpliceFlags.CLOSE_SOURCE, cancellable);
+        message ("File Read: %s: \n%s", _file.get_uri (), (string) ostream.get_data ());
         source.buffer.text = (string) ostream.get_data ();
         var doc = new GSvg.GsDocument ();
         doc.read_from_string ((string) ostream.get_data ());

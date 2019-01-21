@@ -25,9 +25,9 @@ public class Svgvi.App : Gtk.Application {
   construct {
     settings = null;
     SettingsSchemaSource scs = SettingsSchemaSource.get_default ();
-    SettingsSchema ss = scs.lookup ("/mx/pwmc/Svgvi", false);
+    SettingsSchema ss = scs.lookup ("mx.pwmc.Svgvi", false);
     if (ss != null) {
-      settings = new Settings ("/mx/pwmc/Svgvi");
+      settings = new Settings ("mx.pwmc.Svgvi");
       assert (settings != null);
       last_file = settings.get_string ("last-file");
       last_row = settings.get_int ("last-row");
@@ -45,14 +45,44 @@ public class Svgvi.App : Gtk.Application {
       }
       win.present ();
     });
-    shutdown.connect (()=>{
-      var win = get_active_window () as Svgvi.Window;
-      if (win != null && settings != null) {
-        settings.set_string ("last-file", win.file.get_uri ());
-        settings.set_int ("last-row", win.current_row);
-        settings.set_int ("last-column", win.current_column);
+    window_removed.connect ((w)=>{
+      var win = w as Svgvi.Window;
+      if (settings != null) {
+        if (win != null) {
+          settings.set_string ("last-file", win.file.get_uri ());
+          settings.set_int ("last-row", win.current_row);
+          settings.set_int ("last-column", win.current_column);
+          message ("Saved Values: %s : %d : %d",
+            settings.get_string ("last-file"),
+            settings.get_int ("last-row"),
+            settings.get_int ("last-column"));
+        } else {
+          warning ("No active window. No settings will be saved.");
+        }
       } else {
         warning ("Settings were not setup. No settings will be saved.");
+      }
+    });
+    window_added.connect ((w)=>{
+      var win = w as Svgvi.Window;
+      if (settings != null) {
+        if (win != null) {
+          message ("Read on load Values: %s : %d : %d",
+            settings.get_string ("last-file"),
+            settings.get_int ("last-row"),
+            settings.get_int ("last-column"));
+          string f = settings.get_string ("last-file");
+          if (f == "") {
+            return;
+          }
+          win.file = File.new_for_uri (f);
+          win.current_row = settings.get_int ("last-row");
+          win.current_column = settings.get_int ("last-column");
+        } else {
+          warning ("No active window. No settings will be set.");
+        }
+      } else {
+        warning ("Settings were not setup. No settings will be set.");
       }
     });
   }
