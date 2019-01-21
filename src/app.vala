@@ -52,10 +52,6 @@ public class Svgvi.App : Gtk.Application {
           settings.set_string ("last-file", win.file.get_uri ());
           settings.set_int ("last-row", win.current_row);
           settings.set_int ("last-column", win.current_column);
-          message ("Saved Values: %s : %d : %d",
-            settings.get_string ("last-file"),
-            settings.get_int ("last-row"),
-            settings.get_int ("last-column"));
         } else {
           warning ("No active window. No settings will be saved.");
         }
@@ -67,17 +63,15 @@ public class Svgvi.App : Gtk.Application {
       var win = w as Svgvi.Window;
       if (settings != null) {
         if (win != null) {
-          message ("Read on load Values: '%s' : %d : %d",
-            settings.get_string ("last-file"),
-            settings.get_int ("last-row"),
-            settings.get_int ("last-column"));
           string f = settings.get_string ("last-file");
+          int r = settings.get_int ("last-row");
+          int c = settings.get_int ("last-column");
           if (f == "") {
             return;
           }
           win.file = File.new_for_uri (f);
-          win.current_row = settings.get_int ("last-row");
-          win.current_column = settings.get_int ("last-column");
+          win.current_row = r;
+          win.current_column = c;
         } else {
           warning ("No active window. No settings will be set.");
         }

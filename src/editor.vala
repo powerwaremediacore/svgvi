@@ -21,6 +21,8 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
   private Svgvi.SourceView source;
   private File _file = null;
   private Cancellable cancellable = null;
+  private int _current_row;
+  private int _current_column;
 
   public signal void updated ();
 
@@ -32,13 +34,12 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
       _file = value;
       try {
         if (!file.query_exists (cancellable)) {
-          message ("No File exists: %s", _file.get_uri ());
+          warning ("File doesn't exists: %s", _file.get_uri ());
           return;
         }
         var istream = _file.read ();
         var ostream = new MemoryOutputStream.resizable ();
         ostream.splice (istream, OutputStreamSpliceFlags.CLOSE_SOURCE, cancellable);
-        message ("File Read: %s: \n%s", _file.get_uri (), (string) ostream.get_data ());
         source.buffer.text = (string) ostream.get_data ();
         var doc = new GSvg.GsDocument ();
         doc.read_from_string ((string) ostream.get_data ());
@@ -49,8 +50,24 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
     }
   }
 
-  public int current_row { get; set; }
-  public int current_column { get; set; }
+  public int current_row {
+    get { return _current_row; }
+    set {
+      _current_row = value;
+    }
+  }
+  public int current_column {
+    get { return _current_column; }
+    set {
+      Gtk.TextIter iter;
+      _current_column = value;
+      source.buffer.get_start_iter (out iter);
+      iter.forward_lines (_current_row);
+      iter.forward_chars (_current_column);
+      source.buffer.place_cursor (iter);
+      source.scroll_to_mark (source.buffer.get_insert (), 0.0, true, 0.5, 0.5);
+    }
+  }
 
   construct {
     var box = new Gtk.Paned (Gtk.Orientation.VERTICAL);
@@ -75,8 +92,8 @@ public class Svgvi.Editor : Gtk.ScrolledWindow {
       } catch {}
     });
     source.buffer.insert_text.connect ((ref pos, new_text, new_text_length)=>{
-      current_row = pos.get_line ();
-      current_column = pos.get_line_offset ();
+      _current_row = pos.get_line ();
+      _current_column = pos.get_line_offset ();
     });
   }
   public void save_to (File f) {
