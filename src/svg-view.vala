@@ -48,7 +48,7 @@ public class Svgvi.SvgView : Gtk.Grid {
   construct {
     var ha = new Gtk.Adjustment (0, 0, 400, 10, 100, 400);
     var va = new Gtk.Adjustment (0, 0, 400, 10, 100, 400);
-    var sw = new Gtk.ScrolledWindow (ha, va);
+    sw = new Gtk.ScrolledWindow (ha, va);
     _image = new GSvgtk.Image ();
     sw.add (_image);
     attach (sw, 0, 1, 1, 1);

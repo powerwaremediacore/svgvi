@@ -1,6 +1,6 @@
-data/org.gnome.Svgvi.desktop.in
-data/org.gnome.Svgvi.appdata.xml.in
-data/org.gnome.Svgvi.gschema.xml
+data/mx.pwmc.Svgvi.desktop.in
+data/mx.pwmc.Svgvi.appdata.xml.in
+data/mx.pwmc.Svgvi.gschema.xml
 src/window.ui
 src/main.vala
 src/window.vala

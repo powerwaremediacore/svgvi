@@ -67,7 +67,7 @@ public class Svgvi.App : Gtk.Application {
       var win = w as Svgvi.Window;
       if (settings != null) {
         if (win != null) {
-          message ("Read on load Values: %s : %d : %d",
+          message ("Read on load Values: '%s' : %d : %d",
             settings.get_string ("last-file"),
             settings.get_int ("last-row"),
             settings.get_int ("last-column"));

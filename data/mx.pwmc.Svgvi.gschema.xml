@@ -7,12 +7,12 @@
       <description>Last file loaded</description>
     </key>
     <key name="last-row" type="i">
-      <default>1</default>
+      <default>0</default>
        <summary>Last raw when editing</summary>
       <description>Last raw when editing</description>
     </key>
     <key name="last-column" type="i">
-      <default>1</default>
+      <default>0</default>
        <summary>Last column when editing</summary>
       <description>Last column when editing</description>
     </key>

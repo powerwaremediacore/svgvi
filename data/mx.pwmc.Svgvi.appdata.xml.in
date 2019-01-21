@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>org.gnome.Svgvi.desktop</id>
+	<id>mx.pwmc.Svgvi.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
 	<description>
+	  SVG file viewer and editor, with preview on changes made on XML definition
 	</description>
 </component>
