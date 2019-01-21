@@ -32,6 +32,8 @@ public class Svgvi.App : Gtk.Application {
       last_file = settings.get_string ("last-file");
       last_row = settings.get_int ("last-row");
       last_column = settings.get_int ("last-column");
+    } else {
+      warning ("Application's Schema is not installed");
     }
     activate.connect (() => {
       var win = new Svgvi.Window (this);
@@ -49,6 +51,8 @@ public class Svgvi.App : Gtk.Application {
         settings.set_string ("last-file", win.file.get_uri ());
         settings.set_int ("last-row", win.current_row);
         settings.set_int ("last-column", win.current_column);
+      } else {
+        warning ("Settings were not setup. No settings will be saved.");
       }
     });
   }
