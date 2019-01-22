@@ -18,13 +18,23 @@
     </key>
     <key name="last-window-w" type="i">
       <default>800</default>
-       <summary>Last window width</summary>
-      <description>Last window width</description>
+       <summary>Last window's width</summary>
+      <description>Last window's width</description>
     </key>
     <key name="last-window-h" type="i">
       <default>800</default>
-       <summary>Last window size height</summary>
-      <description>Last window size height</description>
+       <summary>Last window's size height</summary>
+      <description>Last window's size height</description>
+    </key>
+    <key name="last-window-x" type="i">
+      <default>100</default>
+       <summary>Last window's X position</summary>
+      <description>Last window's X position</description>
+    </key>
+    <key name="last-window-y" type="i">
+      <default>100</default>
+       <summary>Last window's Y position</summary>
+      <description>Last window's Y position</description>
     </key>
   </schema>
 </schemalist>

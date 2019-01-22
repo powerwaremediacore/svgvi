@@ -19,15 +19,12 @@
 public class Svgvi.App : Gtk.Application {
   private Settings settings;
   private bool init;
-  private int cw;
-  private int ch;
 
   public string last_file { get; set; }
   public int last_row { get; set; }
   public int last_column { get; set; }
   construct {
     init = true;
-    cw = ch = 600;
     settings = null;
     SettingsSchemaSource scs = SettingsSchemaSource.get_default ();
     SettingsSchema ss = scs.lookup ("mx.pwmc.Svgvi", false);
@@ -80,12 +77,19 @@ public class Svgvi.App : Gtk.Application {
           int cw = settings.get_int ("last-window-w");
           int ch = settings.get_int ("last-window-h");
           win.resize (cw, ch);
-          message ("Win Resized to: %d : %d", cw, ch);
+          cw = settings.get_int ("last-window-x");
+          ch = settings.get_int ("last-window-y");
+          win.move (cw, ch);
           win.configure_event.connect (()=>{
             if (win == get_active_window ()) {
-              win.get_size (out cw, out ch);
-              settings.set_int ("last-window-w", cw);
-              settings.set_int ("last-window-h", ch);
+              int ccw, cch;
+              ccw = cch = 0;
+              win.get_size (out ccw, out cch);
+              settings.set_int ("last-window-w", ccw);
+              settings.set_int ("last-window-h", cch);
+              win.get_position (out ccw, out cch);
+              settings.set_int ("last-window-x", ccw);
+              settings.set_int ("last-window-y", cch);
             }
           });
           init = false;
