@@ -3,7 +3,20 @@
 	<id>mx.pwmc.Svgvi.desktop</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <name>SvgVisor</name>
+  <summary>SVG viewer and editor using XML declarations</summary>
+  <update_contact>pwmc-services@pwmc.mx</update_contact>
+  <url type="homepage">https://gitlab.com/pwmc/svgvi</url>
+  <url type="bugtracker">https://gitlab.com/pwmc/svgvi/issues</url>
+  <translation>https://gitlab.com/pwmc/svgvi</translation>
 	<description>
 	  SVG file viewer and editor, with preview on changes made on XML definition
 	</description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>GSVGtk Logo</caption>
+      <image type="source" width="700" height="700">https://gitlab.com/pwmc/gsvgtk/blob/07adc31768f0ba00072870d525d8051966373fad/logo.png</image>
+    </screenshot>
+  </screenshots>
 </component>
+

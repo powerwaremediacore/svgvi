@@ -17,9 +17,9 @@ endif
 appstream_file = i18n.merge_file(
   input: 'mx.pwmc.Svgvi.appdata.xml.in',
   output: 'mx.pwmc.Svgvi.appdata.xml',
-  po_dir: '../po',
+  po_dir: join_paths(meson.source_root (), 'po'),
   install: true,
-  install_dir: join_paths(get_option('datadir'), 'appdata')
+  install_dir: join_paths(get_option('datadir'), 'metainfo')
 )
 
 appstream_util = find_program('appstream-util', required: false)
