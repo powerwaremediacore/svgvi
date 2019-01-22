@@ -15,8 +15,9 @@
   <screenshots>
     <screenshot type="default">
       <caption>GSVGtk Logo</caption>
-      <image type="source" width="700" height="700">https://gitlab.com/pwmc/svgvi/wikis/uploads/bf8c70d6bbc895b2f48fff4dc0e82b15/svgvi1.png</image>
+      <image type="source" width="700" height="700">https://pwmc.gitlab.io/svgvi/svgvi1.png</image>
     </screenshot>
   </screenshots>
 </component>
+
 
