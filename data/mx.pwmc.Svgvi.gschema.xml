@@ -16,5 +16,15 @@
        <summary>Last column when editing</summary>
       <description>Last column when editing</description>
     </key>
+    <key name="last-window-w" type="i">
+      <default>800</default>
+       <summary>Last window width</summary>
+      <description>Last window width</description>
+    </key>
+    <key name="last-window-h" type="i">
+      <default>800</default>
+       <summary>Last window size height</summary>
+      <description>Last window size height</description>
+    </key>
   </schema>
 </schemalist>

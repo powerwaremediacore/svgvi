@@ -18,11 +18,16 @@
 
 public class Svgvi.App : Gtk.Application {
   private Settings settings;
+  private bool init;
+  private int cw;
+  private int ch;
 
   public string last_file { get; set; }
   public int last_row { get; set; }
   public int last_column { get; set; }
   construct {
+    init = true;
+    cw = ch = 600;
     settings = null;
     SettingsSchemaSource scs = SettingsSchemaSource.get_default ();
     SettingsSchema ss = scs.lookup ("mx.pwmc.Svgvi", false);
@@ -62,7 +67,7 @@ public class Svgvi.App : Gtk.Application {
     window_added.connect ((w)=>{
       var win = w as Svgvi.Window;
       if (settings != null) {
-        if (win != null) {
+        if (win != null && init) {
           string f = settings.get_string ("last-file");
           int r = settings.get_int ("last-row");
           int c = settings.get_int ("last-column");
@@ -72,6 +77,18 @@ public class Svgvi.App : Gtk.Application {
           win.file = File.new_for_uri (f);
           win.current_row = r;
           win.current_column = c;
+          int cw = settings.get_int ("last-window-w");
+          int ch = settings.get_int ("last-window-h");
+          win.resize (cw, ch);
+          message ("Win Resized to: %d : %d", cw, ch);
+          win.configure_event.connect (()=>{
+            if (win == get_active_window ()) {
+              win.get_size (out cw, out ch);
+              settings.set_int ("last-window-w", cw);
+              settings.set_int ("last-window-h", ch);
+            }
+          });
+          init = false;
         } else {
           warning ("No active window. No settings will be set.");
         }
