@@ -1,0 +1,7 @@
+pages:
+  stage: deploy
+  script:
+    - mv screenshots/ public
+  artifacts:
+    paths:
+      - public
