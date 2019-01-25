@@ -6,7 +6,7 @@
   <name>SvgVisor</name>
   <summary>SVG viewer and editor using XML declarations</summary>
   <update_contact>pwmc-services@pwmc.mx</update_contact>
-  <url type="homepage">https://gitlab.com/pwmc/svgvi</url>
+  <url type="homepage">https://www.pwmc.mx/page/svgvi-1</url>
   <url type="bugtracker">https://gitlab.com/pwmc/svgvi/issues</url>
   <translation>https://gitlab.com/pwmc/svgvi</translation>
 	<description>
@@ -15,7 +15,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>GSVGtk Logo</caption>
-      <image type="source" width="700" height="700">https://pwmc.gitlab.io/svgvi/svgvi1.png</image>
+      <image type="source" width="500" height="512">https://www.pwmc.mx/web/image/2844</image>
     </screenshot>
   </screenshots><custom>
      <value key="x-appcenter-color-primary">#4e9a06</value>
