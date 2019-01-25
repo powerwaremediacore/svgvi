@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=svgvi
-Exec=svgvi
+Name=SvgVi
+Exec=mx.pwmc.Svgvi
 Terminal=false
 Type=Application
 Icon=mx.pwmc.Svgvi.svg

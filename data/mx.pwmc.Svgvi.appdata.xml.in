@@ -17,7 +17,11 @@
       <caption>GSVGtk Logo</caption>
       <image type="source" width="700" height="700">https://pwmc.gitlab.io/svgvi/svgvi1.png</image>
     </screenshot>
-  </screenshots>
+  </screenshots><custom>
+     <value key="x-appcenter-color-primary">#4e9a06</value>
+     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
+     <value key="x-appcenter-suggested-price">20</value>
+  </custom>
 </component>
 
 

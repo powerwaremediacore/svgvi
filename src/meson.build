@@ -20,7 +20,7 @@ svgvi_sources += gnome.compile_resources('svgvi-resources',
   c_name: 'svgvi'
 )
 
-executable('svgvi', svgvi_sources,
+executable('mx.pwmc.Svgvi', svgvi_sources,
   vala_args: '--target-glib=2.50',  dependencies: svgvi_deps,
   install: true,
 )
